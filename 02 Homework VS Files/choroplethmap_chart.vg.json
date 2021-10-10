@@ -1,0 +1,139 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+      "text": "Outer suburbs have larger household sizes than inner suburbs",
+      "font": "Roboto",
+      "fontSize": 24,
+      "anchor": "start"
+      },
+    "width": "container",
+    "height": 500,
+    "params": [
+      {
+        "name": "zoom_level",
+        "value": 33400,
+        "bind": {
+        "input": "range",
+        "min": 3500,
+        "max": 60000,
+        "step": 100,
+        "name": "Zoom: "
+        }
+      },
+      {
+      "name": "center_to",
+      "value": [145, -37.95],
+      "bind": {
+        "input": "select",
+        "options": [
+          [145, -37.95],
+          [145.5, -37.8],
+          [144.7, -37.7],
+          [145, -37.4],
+          [145, -38.2]],
+        "labels": ["Melbourne CBD", "East Melbourne", "West Melbourne", "North Melbourne", "South East Melbourne"],
+        "name": "Map Centre: "
+        }
+      }
+      ],
+  
+    "projection": {
+      "type": "equirectangular",
+      "center": {"expr": "center_to"},
+      "scale": {"expr": "zoom_level"}
+    },
+  
+    "data": {
+      "url": "https://raw.githubusercontent.com/JosephJohnMonash/FIT3179Homework4/main/data/SA2_2016_AUST%20(1).json",
+      "format": {"type": "topojson", "feature": "SA2_2016_AUST"}
+    },
+  
+  
+    "layer":[
+      { 
+        "transform": [
+          {"calculate": "'Outside Greater Melbourne'", "as": "note"}
+        ],
+        "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"},
+        "encoding": {
+          "tooltip": {
+            "field": "note"
+          }
+        }
+      },
+  
+      {
+        "transform": [
+          {
+            "lookup": "properties.SA2_MAIN16",
+            "from": {
+              "data": {
+                "url": "https://raw.githubusercontent.com/JosephJohnMonash/FIT3179Homework4/main/data/2016Census_G02_VIC_SA2.csv"
+              },
+              "key": "SA2_MAINCODE_2016",
+              "fields": ["Average_household_size"]
+            }
+          }
+        ],
+        
+        "mark": {
+          "type": "geoshape", 
+          "stroke": "white", 
+          "strokeWidth": 0.4},
+  
+        "encoding": {
+          "color": {
+            "field": "Average_household_size", 
+            "type": "quantitative",
+            "title": "HH Size",
+            "scale": {
+              "type": "threshold",
+              "domain": [2, 2.5, 3, 3.5],
+              "range": ["#fee5d9", "#fcae91", "#fb6a4a", "#de2d26", "a50f15"]
+              }
+            },
+  
+          "tooltip": [
+            {
+              "field": "properties.SA2_NAME16",
+              "type": "nominal",
+              "title": "SA2 Region: "
+            },
+            {
+              "field": "Average_household_size",
+              "type": "quantitative",
+              "title": "HH Size: "
+            }
+          ]
+        }
+      },
+  
+    {
+      "mark": {
+        "type": "text", 
+        "align": "right", 
+        "baseline": "middle", 
+        "dx": -25, 
+        "dy": -70,
+        "fontSize": 12, 
+        "fontStyle": "bold"
+      },
+  
+      "encoding": {
+        "text": {
+          "field": "properties.SA2_NAME16", 
+          "type": "nominal"
+        },
+        
+        "opacity": {
+          "condition": {
+            "test": "datum['properties.SA2_NAME16'] == 'Melbourne'", 
+            "value": 1
+            },
+            "value": 0
+          } 
+        }
+      }
+  
+    ]
+  }
