@@ -1,0 +1,60 @@
+{ 
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json", 
+  "width": 500, 
+  "height": 400, 
+  "title": {"text": ""},
+  "data": { 
+    "url": "https://raw.githubusercontent.com/JosephJohnMonash/FIT3179Homework5/main/02%20Homework%20VS%20Files/data/VISTADataCleaned.csv" }, 
+
+  "params": [
+    { 
+      "name": "WaitTime_Above", 
+      "value": 0, 
+      "bind": { 
+        "input": "range", "min": 0, "max": 40, "step": 1, 
+        "name": "Trip Wait Time (mins): " }
+    },
+    {
+    "name": "Continent_selection", 
+    "bind": {
+      "input": "select", 
+      "options": [null, "Banyule (C)", "Bayside (C)", "Boroondara (C)", "Brimbank (C)", "Cardinia (S)", "Casey (C)", "Darebin (C)", "Frankston (C)", "Glen Eira (C)", "Greater Dandenong (C)", "Hobsons Bay (C)", "Hume (C)", "Kingston (C)", "Knox (C)", "Macedon Ranges (S)", "Manningham (C)", "Maribyrnong (C)", "Maroondah (C)", "Melbourne (C)", "Melton (S)", "Mitchell (S)", "Monash (C)", "Mooney Valley (C)", "Moorabool (S)", "Moreland (C)", "Mornington Peninsula (S)"], 
+      "labels":["Show All", "Banyule", "Bayside", "Boroondara", "Brimbank", "Cardinia", "Casey", "Darebin", "Frankston", "Glen Eira", "Greater Dandenong", "Hobsons Bay", "Hume", "Kingston", "Knox", "Macedon Ranges", "Manningham", "Maribyrnong", "Maroondah", "Melbourne", "Melton", "Mitchell", "Monash", "Mooney Valley", "Moorabool", "Moreland", "Mornington Peninsula"],
+      "name": "Continent Selection: " }}], 
+  
+  "transform": [
+    {"filter": "Continent_selection == null || datum.ORIGLGA == Continent_selection"},
+    {"filter": "datum.WAITIME > WaitTime_Above"}],
+
+  "selection": { 
+    "continent_highlight": { "type": "multi", "fields": ["TRIPPURP"], "bind": "legend" }},
+  "mark": "circle", 
+  "encoding": { 
+    "x": { 
+      "field": "CUMDIST", 
+      "type": "quantitative", 
+      "title": "Trip Distance (km)"}, 
+    "y": {
+      "field": "TRIPTIME", 
+      "type": "quantitative", 
+      "title": "Trip Duration (mins)"}, 
+    "color": {
+      "field": "TRIPPURP", 
+      "type": "nominal", 
+      "scale": {
+        "domain": ["Work Related", "Education", "Buy Something", "Social", "Recreational"], 
+        "range": [ "#e41a1c", "#984ea3", "#ff7f00", "#a6cee3", "#377eb8"]},
+      "legend": {"direction": "horizontal", "orient": "top", "title": null, "labelFont": "Roboto", "labelFontSize": 13, "symbolOffset": -40, "padding": 10}},
+      "opacity": {
+        "condition": {"selection": "continent_highlight", "value": 0.6}, "value": 0 }, 
+      "size": { 
+        "field": "WAITIME", 
+        "type": "quantitative",
+        "title": "Wait Time (mins)", 
+      "legend": {"format": ".1s", "labelFont": "Roboto", "labelFontSize": 12, "labelFontStyle": "normal", "titleFont": "Roboto", "titleFontSize": 12, "titleFontStyle": "normal"}}, 
+      "tooltip": [
+        {"field": "ORIGLGA", "type": "nominal", "title": "Origin LGA"},
+        {"field": "CUMDIST", "type": "quantitative", "format": ".1f", "title": "Distance (km)"},
+        {"field": "TRIPTIME", "type": "quantitative", "format": ".1f", "title": "Duration (mins)"}]
+  } 
+}
