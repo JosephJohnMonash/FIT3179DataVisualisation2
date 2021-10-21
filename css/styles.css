@@ -3,8 +3,36 @@
 }
 
 h1 {
-    font-family: 'Bitter', serif;;
-    font-weight: 900;
+    font-family: 'Bitter', serif;
+    font-weight: 1000;
+}
+
+h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: x-large;
+    padding-top: 30px;
+}
+
+h2 span{
+    color: #0f4c5c;
+}
+
+h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: larger;
+}
+
+h3 span{
+    color: #0f4c5c;
+}
+
+p1 {
+    font-family: 'Roboto', sans-serif;
+}
+
+p span{
+    color: #0f4c5c;
+    font-weight: bold;
 }
 
 body {
@@ -12,11 +40,11 @@ body {
 }
 
 .page {
-    width: 850px;
+    width: 800px;
     background-color: white;
     margin: auto;
-    padding: 200px;
-    padding-top: 180px;
+    padding: 80px;
+    padding-top: 80px;
 }
 
 .vis-container {
@@ -42,7 +70,14 @@ h1 {
     margin-bottom: 25px;
 }
 
+.pure-u-1-2:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
 .small-font {
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
 }
+

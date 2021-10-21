@@ -1,83 +1,84 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": {
-      "text": "How does gender influence mode choice?",
-      "font": "Roboto",
-      "fontSize": 24,
-      "anchor": "start"
-      },
-    "width": "container",
-    "height": 350,
-    "data": {"url": "https://raw.githubusercontent.com/JosephJohnMonash/FIT3179Homework4/main/data/2016Census_G59_VIC_SA2-Final.csv"},
-  
-    "layer":[
-      {
-        "params":[{
-        "name": "gender_highlight", 
-        "select": {
-          "type": "point", 
-          "fields": ["Gender"]}, 
-          "bind": "legend"
-          }],
-        "mark": "bar",
-        "encoding": {
-          "x": {
-            "field": "Count", 
-            "aggregate": "sum",
-            "stack": "normalize",
-            "title": false,
-            "axis": {
-              "grid": false,
-              "ticks": false ,
-              "labelFont": "Roboto", 
-              "labelFontSize": 12,
-              "labelPadding": 10,
-              "domain": false}},
-            
-          "y": {
-            "field": "Mode1", 
-  
-            "title": false,
-            "axis": {
-              "ticks": false ,
-              "labelFont": "Roboto", 
-              "labelFontSize": 14, 
-              "labelFontStyle": "Normal",
-              "labelAlign": "left",
-              "labelPadding": 115,
-              "domain": false}},
-  
-          "color": {
-            "field": "Gender",
-            "scale": {"range": ["#c31e23", "#cdcdcd", "#e8e8e8"]},
-            "title": null,
-            "legend": {
-              "direction": "horizontal",
-              "orient": "top",
-              "symbolSize": 170,
-              "labelFontSize": 12,
-              "padding": 10
-            }},
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "",
+    "font": "Roboto",
+    "fontSize": 20,
+    "anchor": "start"
+    },
+  "width": "container",
+  "height": 350,
+  "data": {"url": "https://raw.githubusercontent.com/JosephJohnMonash/FIT3179Homework4/main/data/2016Census_G59_VIC_SA2-Final.csv"},
+
+  "layer":[
+    {
+      "params":[{
+      "name": "gender_highlight", 
+      "select": {
+        "type": "point",
+        "on": "mouseover", 
+        "fields": ["Gender"]}, 
+        "bind": "legend"
+        }],
+      "mark": "bar",
+      "encoding": {
+        "x": {
+          "field": "Count", 
+          "aggregate": "sum",
+          "stack": "normalize",
+          "title": false,
+          "axis": {
+            "grid": false,
+            "ticks": true ,
+            "labelFont": "Roboto", 
+            "labelFontSize": 12,
+            "labelPadding": 10,
+            "domain": false,
+            "format": ".0%"}},
           
-          "opacity": {
-            "condition": {
-              "param": "gender_highlight",
-              "value": 1}, 
-            "value": 0.1}    
-            }
-      },
-  
-      {"mark": {"type": "text", "dx": 15, "dy": 0},
-        "encoding": {
-          "x": {"field": "Count", "aggregate": "sum", "stack": "normalize"},
-          "y": {"field": "Mode1", "type": "nominal"},
-          "color": {"field": "Gender", "scale": {"range": ["white"]}, "legend": null},
-          "text": {"aggregate": "sum", "field": "FemaleProp", "type": "quantitative", "format": ".2f", "stack": "normalize"},
-          "opacity": {"condition": {"test": "datum['Gender'] == 'Female'", "value": 1}, "value": 0}
+        "y": {
+          "field": "Mode1", 
+
+          "title": false,
+          "axis": {
+            "ticks": false ,
+            "labelFont": "Roboto", 
+            "labelFontSize": 13, 
+            "labelFontStyle": "Bold",
+            "labelAlign": "left",
+            "labelPadding": 110,
+            "domain": false}},
+
+        "color": {
+          "field": "Gender",
+          "scale": {"range": ["#0f4c5c", "#cdcdcd", "#e8e8e8"]},
+          "title": null,
+          "legend": {
+            "direction": "horizontal",
+            "orient": "top",
+            "symbolSize": 170,
+            "labelFontSize": 12,
+            "padding": 10
+          }},
+        
+        "opacity": {
+          "condition": {
+            "param": "gender_highlight",
+            "value": 1}, 
+          "value": 0.1}    
           }
-          
-      }
-  
-    ]
-  }
-  
+    },
+
+    {"mark": {"type": "text", "dx": 15, "dy": 0},
+      "encoding": {
+        "x": {"field": "Count", "aggregate": "sum", "stack": "normalize"},
+        "y": {"field": "Mode1", "type": "nominal"},
+        "color": {"field": "Gender", "scale": {"range": ["white"]}, "legend": null},
+        "text": {"aggregate": "sum", "field": "FemaleProp", "type": "quantitative", "format": ".0%", "stack": "normalize"},
+        "opacity": {"condition": {"test": "datum['Gender'] == 'Female'", "value": 1}, "value": 0}
+        }
+        
+    }
+
+  ]
+}

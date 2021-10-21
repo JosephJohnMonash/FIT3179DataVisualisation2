@@ -1,10 +1,10 @@
 { 
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json", 
-  "width": 500, 
+  "width": "container", 
   "height": 400, 
   "title": {"text": ""},
   "data": { 
-    "url": "https://raw.githubusercontent.com/JosephJohnMonash/FIT3179Homework5/main/02%20Homework%20VS%20Files/data/VISTADataCleaned.csv" }, 
+    "url": "https://raw.githubusercontent.com/JosephJohnMonash/FIT3179DataVisualisation2/main/02%20Homework%20VS%20Files/data/VISTADataCleaned.csv" }, 
 
   "params": [
     { 
@@ -17,33 +17,60 @@
     {
     "name": "Continent_selection", 
     "bind": {
-      "input": "select", 
-      "options": [null, "Banyule (C)", "Bayside (C)", "Boroondara (C)", "Brimbank (C)", "Cardinia (S)", "Casey (C)", "Darebin (C)", "Frankston (C)", "Glen Eira (C)", "Greater Dandenong (C)", "Hobsons Bay (C)", "Hume (C)", "Kingston (C)", "Knox (C)", "Macedon Ranges (S)", "Manningham (C)", "Maribyrnong (C)", "Maroondah (C)", "Melbourne (C)", "Melton (S)", "Mitchell (S)", "Monash (C)", "Mooney Valley (C)", "Moorabool (S)", "Moreland (C)", "Mornington Peninsula (S)"], 
-      "labels":["Show All", "Banyule", "Bayside", "Boroondara", "Brimbank", "Cardinia", "Casey", "Darebin", "Frankston", "Glen Eira", "Greater Dandenong", "Hobsons Bay", "Hume", "Kingston", "Knox", "Macedon Ranges", "Manningham", "Maribyrnong", "Maroondah", "Melbourne", "Melton", "Mitchell", "Monash", "Mooney Valley", "Moorabool", "Moreland", "Mornington Peninsula"],
-      "name": "Continent Selection: " }}], 
+      "input": "select",
+      "options": [null, "Boroondara (C)", "Brimbank (C)", "Casey (C)", 
+      "Darebin (C)", "Glen Eira (C)", "Greater Dandenong (C)", "Hobsons Bay (C)", 
+      "Kingston (C)", "Knox (C)", "Manningham (C)", "Maribyrnong (C)", 
+      "Maroondah (C)", "Melbourne (C)", "Monash (C)", "Moreland (C)"], 
+      "labels":["Show All LGAs", "Boroondara", "Brimbank", "Casey", "Darebin", 
+      "Glen Eira", "Greater Dandenong", "Hobsons Bay", "Kingston", "Knox", 
+      "Manningham", "Maribyrnong", "Maroondah", "Melbourne", "Monash", "Moreland"],
+      "name": "LGA Selection: " }}], 
   
   "transform": [
     {"filter": "Continent_selection == null || datum.ORIGLGA == Continent_selection"},
     {"filter": "datum.WAITIME > WaitTime_Above"}],
 
   "selection": { 
-    "continent_highlight": { "type": "multi", "fields": ["TRIPPURP"], "bind": "legend" }},
+    "continent_highlight": {"type": "multi", "fields": ["TRIPPURP"], "bind": "legend" }},
   "mark": "circle", 
   "encoding": { 
     "x": { 
       "field": "CUMDIST", 
       "type": "quantitative", 
-      "title": "Trip Distance (km)"}, 
+      "title": "Trip Distance (km)",
+      "axis": {
+            "ticks": false ,
+            "labelFont": "Roboto", 
+            "titleFont": "Roboto",
+            "titleFontSize": 14,
+            "titlePadding": 20,
+            "labelFontSize": 13, 
+            "labelFontStyle": "Normal",
+            "labelAlign": "left",
+            "labelPadding": 15,
+            "domain": false}}, 
     "y": {
       "field": "TRIPTIME", 
       "type": "quantitative", 
-      "title": "Trip Duration (mins)"}, 
+      "title": "Trip Duration (mins)",
+      "axis": {
+            "ticks": false ,
+            "labelFont": "Roboto", 
+            "titleFont": "Roboto",
+            "titleFontSize": 14,
+            "titlePadding": 20,
+            "labelFontSize": 13, 
+            "labelFontStyle": "Normal",
+            "labelAlign": "left",
+            "labelPadding": 30,
+            "domain": false}}, 
     "color": {
       "field": "TRIPPURP", 
       "type": "nominal", 
       "scale": {
-        "domain": ["Work Related", "Education", "Buy Something", "Social", "Recreational"], 
-        "range": [ "#e41a1c", "#984ea3", "#ff7f00", "#a6cee3", "#377eb8"]},
+        "domain": ["Work Related", "Education", "Buy Something", "Social"], 
+        "range": [ "#0f4c5c", "#e41a1c", "#ff7f00", "#984ea3"]},
       "legend": {"direction": "horizontal", "orient": "top", "title": null, "labelFont": "Roboto", "labelFontSize": 13, "symbolOffset": -40, "padding": 10}},
       "opacity": {
         "condition": {"selection": "continent_highlight", "value": 0.6}, "value": 0 }, 
@@ -55,6 +82,4 @@
       "tooltip": [
         {"field": "ORIGLGA", "type": "nominal", "title": "Origin LGA"},
         {"field": "CUMDIST", "type": "quantitative", "format": ".1f", "title": "Distance (km)"},
-        {"field": "TRIPTIME", "type": "quantitative", "format": ".1f", "title": "Duration (mins)"}]
-  } 
-}
+        {"field": "TRIPTIME", "type": "quantitative", "format": ".1f", "title": "Duration (mins)"}] } }

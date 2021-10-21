@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Multiple Visualisations | An Example</title>
+  <title>FIT3719 | Data Visualisation 2</title>
   <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
@@ -18,7 +18,7 @@
  
   <!-- CSS file -->
   <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
-
+  <link rel="stylesheet" href="fonts.css">
 
 </head>
 <body>
@@ -28,8 +28,8 @@
    <!-- pure grid group -->
     <div class="pure-g">
       <div class="pure-u-1-1">
-        <h1>FIT3179 Week 10 Homework - Multiple Visualisations</h1>
-        <p>Joseph John (29671183).</p>
+        <h1>Understanding Travel Behaviour in Melbourne</h1>
+        <p1>Insights from VISTA 2016-2018 Household Travel Survey Data</p1>
       </div>
     </div>
   <!-- end pure grid group -->
@@ -38,16 +38,25 @@
     <div class="pure-g">
       <div class="pure-u-1-1">
         <div class="description description-left">
-          <h2>This is the first section</h2>
-          <p>Using all three columns without merging. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Massa sapien faucibus et molestie ac feugiat sed. Egestas purus viverra accumsan in nisl.</p>
+          <h2>How does gender influence mode choice?</h2>
+          <p>There are many socio-economic factors which influence selection of mode for travel. In Australia, research has shown
+             that <span>women</span> are generally under-represented when it comes to cycling. This is in stark contrast to other European 
+             cities, such as Netherlands, where cycling rates amongst <span>women are are much higher.</span></p>
+          <p>The stacked bar chart below shows this general trend clearly. Hover over the bar chart or click on the legend labels to distinguish
+            between males and <span>females</span>. Note that the 'unspecified' category represents those in the VISTA survey who did not wish to 
+            disclose their gender. 
+          </p>
         </div>
       </div>
     </div>
     <!-- end pure grid group -->
 
     <!-- pure grid group -->
+    <div class="description description-left">
+      <h3><span>Females</span> are less likely to travel by bicyle than car</h3>
+    </div>
+
     <div class="pure-g">
-  
         <div class="pure-u-1-1">
           <div id="vis1" class="vis-container"></div>
         </div>
@@ -59,13 +68,23 @@
     <div class="pure-g">
       <div class="pure-u-1-1">
         <div class="description description-left">
-          <h2>This is the second section</h2>
-          <p>Using all three columns without merging. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Massa sapien faucibus et molestie ac feugiat sed. Egestas purus viverra accumsan in nisl.</p>
+          <h2>How does household size affect travel behaviour?</h2>
+          <p>Research has shown that Household Size (HH Size, which represents the number of persons in a household) directly correlates with the number of trips generated. 
+            That is, larger households create more trips than smaller households. The choropleth map below shows that areas
+            closer to Melbourne CBD tend to have smaller sized households (on average), while those in outer suburban or rural areas have larger
+            household sizes (on average).</p>
+          <p>Under the research showing this correlation, it can be seen that <span>households further away from 
+            CBD region make more trips per household </span>. Note that Statistical Area (SA2 Region) are official regions used by the Australian
+          Bureau of Statistics in the census. The represent geographic regions of consistent economic and social standings.</p>
         </div>
       </div>
     </div>
     <!-- end pure grid group -->
 
+    
+    <div class="description description-left">
+      <h3>Outer suburbs have larger household sizes than inner suburbs</h3>
+    </div>
 
     <!-- pure grid group -->
     <div class="pure-g">
@@ -75,14 +94,49 @@
       
     </div>
     <!-- end pure grid group -->
-    
 
     <!-- pure grid group -->
     <div class="pure-g">
       <div class="pure-u-1-1">
         <div class="description description-left">
-          <h2>This is the third section</h2>
-          <p>Using all three columns without merging. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Massa sapien faucibus et molestie ac feugiat sed. Egestas purus viverra accumsan in nisl.</p>
+          <h2>Trip characteristics and purposes</h2>
+          <p>People make trips for different reasons, such as for work, shopping or socialising. The bubble chart below
+            shows that work related trips can vary significantly in duration and distance. Shopping trips generally tend to be much 
+            shorter, implying that people prefer to shop locally. We can also see when the trip duration gets longer, so does the wait time. 
+            Trip duration and distance are strongly related, however, the former increases at a much faster rate than the latter.
+          </p>
+          <p>Please toggle between different trip purposes by selecting the legend. Longer trips can be filtered by using the wait time slider. Further, 
+            the drop down selection can be used to filter for a selection of Local Government Areas (LGAs). 
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+   <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+      <div id="vis3"  class="vis-container"></div>
+    </div>
+  
+    </div>
+       <!-- pure grid group -->
+       <div class="pure-g">
+        <div class="pure-u-1-1">
+          <div id="vis3"  class="vis-container"></div>
+        </div>
+      
+    </div>
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="description description-left">
+          <h2>Conclusions</h2>
+          <p>From our analysis, we can see that greater focus should be invested in promoting active transportation modes as the private motor vehicle is 
+            most popular choice of travel mode. This is also important to ensure that riding feels safe, as generally many women in Australia (and Western Countries)
+          are reluctant to ride, compared to European countries. We have also seen that regions closer to the CBD tend to travel less than those further away. Greater focus
+        should be on intensifying land uses closer to CBD areas. Overall, these strategies can help improve the sustainability of transport in Melbourne. </p>
         </div>
       </div>
     </div>
@@ -100,6 +154,7 @@
 <script type="text/javascript">
   var specVis1 = "./stackedbar_chart.vg.json";
   var specVis2= "./choroplethmap_chart.vg.json";
+  var specVis3= "./scatterplot_chart.vg.json";
 
   vegaEmbed('#vis1', specVis1, {"actions": false});
   
@@ -107,7 +162,7 @@
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 
-  vegaEmbed('#vis3', specVis1, {"actions": false}).then(function(result) {
+  vegaEmbed('#vis3', specVis3, {"actions": false}).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 
